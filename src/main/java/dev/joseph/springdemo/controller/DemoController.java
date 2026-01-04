@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import dev.joseph.springdemo.model.*;
 import dev.joseph.springdemo.repository.DemoCollectionRepository;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/api/demo")
@@ -71,12 +72,12 @@ public class DemoController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createdDemo(@RequestBody demoModel item){
+    public void createdDemo(@Valid @RequestBody demoModel item){
         demoCollectionRepository.createDemo(item);
     }
 
     @PutMapping("/update/{id}")
-    public void updateDemo(@RequestBody demoModel item, @PathVariable Integer id){
+    public void updateDemo(@Valid @RequestBody demoModel item, @PathVariable Integer id){
         demoCollectionRepository.updateDemo(item, id);
     }
 }
